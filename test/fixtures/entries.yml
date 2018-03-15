@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  idparcel: MyString
+  name: MyString
+  desti: MyString
+
+two:
+  idparcel: MyString
+  name: MyString
+  desti: MyString

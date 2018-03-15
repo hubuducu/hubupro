@@ -1,0 +1,7 @@
+var array_entry = []
+<% @searchentries.each do |entry| %>
+array_entry.push("<%= entry.idparcel %>");
+<% end %>
+var result = document.getElementById("result");
+result.innerHTML = "";
+array_entry.forEach((entry)=>{result.innerHTML += entry + "<br>"});

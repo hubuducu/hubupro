@@ -7,8 +7,8 @@ class EntriesController < ApplicationController
     @entries = Entry.all
 		@entries = @entries.order('created_at DESC')
 		puts params
-	badou = params["idparcel"]
-	@searchentries = Entry.search_attr(badou)
+	id_search = params["idparcel"]
+	@searchentries = Entry.search_attr(id_search)
   end
 
   # GET /entries/1
@@ -19,16 +19,18 @@ class EntriesController < ApplicationController
   # GET /entries/new
   def new
     @entry = Entry.new
+	@destis = Desti.all
   end
 
   # GET /entries/1/edit
   def edit
+  	@destis = Desti.all
   end
 
   # POST /entries
   # POST /entries.json
   def create
-    @entry = Entry.new(entry_params)
+    @entry = Entry.new(idparcel: entry_params["idparcel"], name: entry_params["name"], desti_id: params[:desti_id].to_i)
 
     respond_to do |format|
       if @entry.save
@@ -44,6 +46,7 @@ class EntriesController < ApplicationController
   # PATCH/PUT /entries/1
   # PATCH/PUT /entries/1.json
   def update
+  @entry = Entry.new(idparcel: entry_params["idparcel"], name: entry_params["name"], desti_id: params[:desti_id].to_i)
     respond_to do |format|
       if @entry.update(entry_params)
         format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }

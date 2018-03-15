@@ -22,9 +22,19 @@
   </div>
 
   <div class="field">
-    <%= form.label :desti %>
-    <%= form.text_field :desti, id: :entry_desti %>
+    <select name="desti_id">
+
+    <% @destis.each do |category| %>
+
+      <option value="<%= category.id %>"><%= category.name %></option>
+		
+    <% end %>
+
+	
+	
+  </select>
   </div>
+  
 
   <div class="actions">
     <%= form.submit %>

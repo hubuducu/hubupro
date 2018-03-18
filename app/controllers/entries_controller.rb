@@ -1,11 +1,10 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column, :sort_direction
   # GET /entries
   # GET /entries.json
   def index
-    @entries = Entry.all
-		@entries = @entries.order('created_at DESC')
+    @entries = Entry.order(sort_column + " " + sort_direction)
 		puts params
 	id_search = params["idparcel"]
 	@searchentries = Entry.search_attr(id_search)
@@ -69,6 +68,12 @@ class EntriesController < ApplicationController
   end
 
   private
+  def sort_column
+  params[:sort] || "name"
+  end
+    def sort_direction
+	params[:direction] || "desc"
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_entry
       @entry = Entry.find(params[:id])

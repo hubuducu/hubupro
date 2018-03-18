@@ -5,6 +5,7 @@ class EntriesController < ApplicationController
   # GET /entries.json
   def index
     @entries = Entry.order(sort_column + " " + sort_direction)
+	@entries = Entry.paginate(:page => params[:page], :per_page => 10)
 		puts params
 	id_search = params["idparcel"]
 	@searchentries = Entry.search_attr(id_search)
